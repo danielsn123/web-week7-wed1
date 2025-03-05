@@ -9,8 +9,8 @@ import {
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/HomePage";
 import AddJobPage from "./pages/AddJobPage";
-import JobPage from "./pages/ProductPage";
-import EditJobPage from "./pages/EditJobPage";
+import ProductPage from "./pages/ProductPage";
+import EditJobPage from "./pages/EditProductPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
