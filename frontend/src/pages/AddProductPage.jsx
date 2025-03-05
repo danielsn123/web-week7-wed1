@@ -12,6 +12,9 @@ const AddProductPage = () => {
   const [contactPhone, setContactPhone] = useState("");
   const [rating, setRating] = useState("");
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user ? user.token : null;
+
   const navigate = useNavigate();
  
   const addProduct = async (newProduct) => {

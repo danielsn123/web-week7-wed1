@@ -1,21 +1,29 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-const ProductPage = () => {
+const ProductPage = ({ isAuthenticated }) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user ? user.token : null;
+
   const deleteProduct = async (id) => {
     try {
       const res = await fetch(`/api/products/${id}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (!res.ok) {
-        throw new Error("Failed to delete product");
+        const errorText = await res.text();
+        throw new Error(`Failed to delete product: ${errorText}`);
       }
+      console.log("Product deleted successfully");
       navigate("/");
     } catch (error) {
       console.error("Error deleting product:", error);
@@ -25,7 +33,6 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        console.log("id: ", id);
         const res = await fetch(`/api/products/${id}`);
         if (!res.ok) {
           throw new Error("Network response was not ok");
@@ -60,17 +67,23 @@ const ProductPage = () => {
       ) : (
         <>
           <h2>{product.title}</h2>
-          <p>Title: {product.title}</p>
           <p>Category: {product.category}</p>
           <p>Description: {product.description}</p>
           <p>Price: {product.price}</p>
-          <p>Stock Quantity: {product.stockQuantity}</p>
-          <p>Name: {product.supplier.name}</p>
+          <p>Amount in stock: {product.stockQuantity}</p>
+          <p>Supplier: {product.supplier.name}</p>
           <p>Email: {product.supplier.contactEmail}</p>
           <p>Phone: {product.supplier.contactPhone}</p>
           <p>Rating: {product.supplier.rating}</p>
-          <button onClick={() => onDeleteClick(product._id)}>delete</button>
-          <button onClick={() => navigate(`/edit-product/${product._id}`)}>edit</button>
+
+          {isAuthenticated && (
+            <>
+              <button onClick={() => onDeleteClick(product._id)}>delete</button>
+              <button onClick={() => navigate(`/edit-product/${product._id}`)}>
+                edit
+              </button>
+            </>
+          )}
         </>
       )}
     </div>
