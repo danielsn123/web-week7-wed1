@@ -113,6 +113,14 @@ const AddProductPage = () => {
           value={contactPhone}
           onChange={(e) => setContactPhone(e.target.value)}
         />
+        <label>Supplier rating:</label>
+        <input
+          type="number"
+          value={rating}
+          min="1"
+          max="5"
+          onChange={(e) => setRating(e.target.value)}
+        />
         <button>Add product</button>
       </form>
     </div>
