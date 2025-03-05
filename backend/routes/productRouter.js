@@ -6,8 +6,9 @@ const {
   updateProduct,
   deleteProduct,
 } = require("../controllers/productControllers");
-
+const requireAuth = require("../middleware/requireAuth");
 const router = express.Router();
+router.use(requireAuth);
 
 router.get("/", getAllProducts);
 router.post("/", createProduct);
