@@ -1,4 +1,7 @@
+const mongoose = require('mongoose');
+
 const productSchema = new mongoose.Schema({
+
   title: { type: String, required: true },
   category: { type: String, required: true }, // e.g., Electronics, Clothing, Furniture
   description: { type: String, required: true },
