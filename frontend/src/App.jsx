@@ -8,9 +8,9 @@ import {
 // pages & components
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/HomePage";
-import AddJobPage from "./pages/AddJobPage";
+import AddProductPage from "./pages/AddProductPage";
 import ProductPage from "./pages/ProductPage";
-import EditJobPage from "./pages/EditProductPage";
+import EditProductPage from "./pages/EditProductPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
@@ -18,9 +18,9 @@ const App = () => {
     createRoutesFromElements(
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
-        <Route path="/jobs/add-job" element={<AddJobPage />} />
-        <Route path="/edit-job/:id" element={<EditJobPage />} />
-        <Route path="/jobs/:id" element={<JobPage />} />
+        <Route path="/products/add-job" element={<AddProductPage />} />
+        <Route path="/edit-product/:id" element={<EditProductPage />} />
+        <Route path="/products/:id" element={<ProductPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     )
