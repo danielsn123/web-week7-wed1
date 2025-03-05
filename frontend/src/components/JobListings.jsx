@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
 
-const JobListings = ({ jobs }) => {
+const ProductListings = ({ products }) => {
   return (
     <div className="job-list">
-      {jobs.map((job) => (
+      {products.map((product) => (
 
-        <div className="job-preview" key={job.id}>
-          <Link to={`/jobs/${job.id}`}>
-            <h2>{job.title}</h2>
+        <div className="job-preview" key={product.id}>
+          <Link to={`/jobs/${product.id}`}>
+            <h2>{product.title}</h2>
           </Link>
-          <p>Type: {job.type}</p>
-          <p>Company: {job.company.name}</p>
+          <p>Category: {product.category}</p>
+          <p>Supplier: {product.supplier.name}</p>
         </div>
       ))}
     </div>
   );
 };
 
-export default JobListings;
+export default ProductListings;
