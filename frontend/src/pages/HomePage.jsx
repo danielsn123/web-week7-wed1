@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
-import JobListings from "../components/JobListings";
+import ProductListings from "../components/ProductListings";
 
 const Home = () => {
-  const [jobs, setJobs] = useState(null);
+  const [products, setProducts] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchJobs = async () => {
+    const fetchProducts = async () => {
       try {
-        const res = await fetch("api/jobs");
+        const res = await fetch("api/products");
         if (!res.ok) {
           throw new Error("could not fetch the data for that resource");
         }
         const data = await res.json();
         setIsPending(false);
-        setJobs(data);
+        setProducts(data);
         setError(null);
       } catch (err) {
         setIsPending(false);
@@ -23,14 +23,14 @@ const Home = () => {
       }
     };
     // setTimeout(() => {fetchJobs();}, 1000); // Delay of 1 second
-    fetchJobs();
+    fetchProducts();
   }, []);
 
   return (
     <div className="home">
       {error && <div>{error}</div>}
       {isPending && <div>Loading...</div>}
-      {jobs && <JobListings jobs={jobs} />}
+      {products && <ProductListings products={products} />}
     </div>
   );
 };
